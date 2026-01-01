@@ -1,0 +1,17 @@
+# Python: Bỏ qua các file rác sinh ra khi chạy code
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook: Bỏ qua các bản lưu tạm
+.ipynb_checkpoints
+
+# C++: Bỏ qua các file thực thi và thư viện đã biên dịch
+*.exe
+*.dll
+*.o
+*.obj
+
+# OS rác
+.DS_Store
+Thumbs.db
