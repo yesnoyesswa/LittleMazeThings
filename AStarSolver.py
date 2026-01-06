@@ -90,16 +90,14 @@ def animate_astar_solve(maze_np, vision_limit=1, sleep_time=0.01):
 
     plt.ioff()
     
-    print("\n" + "="*30)
     print(f"KẾT QUẢ A*")
     print(f"Kích thước mê cung: {size}x{size}")
     print(f"Tầm nhìn Agent   : {vision_limit*2+1}x{vision_limit*2+1}")
     print(f"Trạng thái       : {'THÀNH CÔNG ' if success else 'THẤT BẠI '}")
     print(f"Tổng số bước đi  : {final_steps}")
-    print("="*30)
     
     plt.show()
 
 if __name__ == "__main__":
-    maze = generate_maze(30)
+    maze = generate_maze(23)
     animate_astar_solve(maze, vision_limit=1)
