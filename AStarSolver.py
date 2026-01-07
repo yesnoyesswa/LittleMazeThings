@@ -16,19 +16,23 @@ def update_knowledge(current_pos, maze_np, knowledge_map, vision_range=1):
 
 def a_star_algorithm(start, goal, knowledge_map):
     size = knowledge_map.shape[0]
-    open_set = []
+
+    open_set = [] # Priority Queue
     heapq.heappush(open_set, (0, start))
     came_from = {}
-    g_score = {start: 0}
-    f_score = {start: get_manhattan_dist(start, goal)}
+    g_score = {start: 0} # Chi phí thực tế
+    f_score = {start: get_manhattan_dist(start, goal)} # Tổng chi phí dự kiến
+
     while open_set:
         current = heapq.heappop(open_set)[1]
+
         if current == goal:
             path = []
             while current in came_from:
                 path.append(current)
                 current = came_from[current]
             return path[::-1]
+        
         for dy, dx in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             neighbor = (current[0] + dy, current[1] + dx)
             if 0 <= neighbor[0] < size and 0 <= neighbor[1] < size:
@@ -48,7 +52,6 @@ def animate_astar_solve(maze_np, vision_limit=1, sleep_time=0.01):
     goal_pos = tuple(np.argwhere(maze_np == 9)[0])
     curr_pos = start_pos
     
-    path_history = [] # Lưu vết chân đã đi
     success = False
     final_steps = 0
 
@@ -56,7 +59,6 @@ def animate_astar_solve(maze_np, vision_limit=1, sleep_time=0.01):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
     
     for step in range(2000):
-        path_history.append(curr_pos)
         if curr_pos == goal_pos:
             success = True
             final_steps = step
