@@ -101,5 +101,5 @@ def animate_astar_solve(maze_np, vision_limit=1, sleep_time=0.01):
     plt.show()
 
 if __name__ == "__main__":
-    maze = generate_maze(23)
+    maze = generate_maze(20)
     animate_astar_solve(maze, vision_limit=1)
