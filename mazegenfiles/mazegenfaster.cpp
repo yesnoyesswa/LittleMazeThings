@@ -2,11 +2,11 @@
 #include <vector>
 #include <random>
 #include <algorithm>
-
 using namespace std;
 
 extern "C" {
 
+    // output_maze: con trỏ đến mảng mà Python sẽ nhận dữ liệu
     void generate_maze_cpp(int* output_maze, int size) {
         int pre_size = 3 * size - 2;
         vector<int> maze_grid(pre_size * pre_size);
@@ -28,18 +28,20 @@ extern "C" {
             }
         }
 
+        // Origin Shift Algorithm
         int y = pre_size - 1;
         int x = pre_size - 1;
+        
         random_device rd;
         mt19937 gen(rd());
         
         long long iterations = (long long)size * size * size * size * size;
         for (long long i = 0; i < iterations; ++i) {
             vector<int> moves;
-            if (y - 3 >= 0) moves.push_back(0); 
-            if (x - 3 >= 0) moves.push_back(1); 
-            if (y + 3 < pre_size) moves.push_back(2); 
-            if (x + 3 < pre_size) moves.push_back(3); 
+            if (y - 3 >= 0) moves.push_back(0); // North
+            if (x - 3 >= 0) moves.push_back(1); // West
+            if (y + 3 < pre_size) moves.push_back(2); // South
+            if (x + 3 < pre_size) moves.push_back(3); // East
 
             if (moves.empty()) break;
 
@@ -61,7 +63,6 @@ extern "C" {
             }
         }
 
-        
         int final_size = 2 * size - 1;
         int out_r = 0;
         for (int i = 0; i < pre_size; ++i) {
@@ -71,16 +72,17 @@ extern "C" {
                 if (j % 3 == 2) continue;
                 
                 int val = maze_grid[i * pre_size + j];
-            
-                output_maze[out_r * final_size + out_c] = (val == 0 || val == 1 || val == -1) ? 0 : -1;
+
+                output_maze[out_r * final_size + out_c] = (val == 0 || val == 1 || val == -1) ? 0 : 1;
                 out_c++;
             }
             out_r++;
         }
         
-        output_maze[0] = 2;                                
-        output_maze[final_size * final_size - 1] = 1;        
-    } 
-} 
+
+        output_maze[0] = 2;
+        output_maze[final_size * final_size - 1] = 9;
+    }
+}
 
 //g++ -O3 -shared -static -static-libgcc -static-libstdc++ -o maze_genc.dll .\mazegenfaster.cpp

@@ -13,7 +13,11 @@ def generate_maze(size):
     
     # Khai báo kiểu đối số cho hàm C++
     # arg1: con trỏ mảng, arg2: số nguyên kích thước
-    maze_lib.generate_maze_cpp.argtypes = [ np.ctypeslib.ndpointer(dtype=np.int32), ctypes.c_int ]
+    maze_lib.generate_maze_cpp.argtypes = [
+        np.ctypeslib.ndpointer(dtype=np.int32), 
+        ctypes.c_int
+    ]
+    
     maze_lib.generate_maze_cpp(maze_buffer, size)
     
     return maze_buffer
