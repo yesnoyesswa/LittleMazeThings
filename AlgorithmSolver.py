@@ -156,5 +156,5 @@ def animate_with_trail(maze_np, algo="A*", pause_time=0.01):
     plt.ioff(); plt.show()
 
 if __name__ == "__main__":
-    maze = np.array(generate_maze(5)) 
-    animate_with_trail(maze, algo="Dijkstra", pause_time=0.001)
+    maze = np.array(generate_maze(20)) 
+    animate_with_trail(maze, algo="DFS", pause_time=0.001)
